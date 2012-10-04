@@ -10,5 +10,6 @@ import java.util.Map;
  */
 public interface Measurement {
     public String getName();
+    public String getSource();
     public Map<String, Number> toMap();
 }

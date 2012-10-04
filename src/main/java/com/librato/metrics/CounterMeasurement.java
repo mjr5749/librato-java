@@ -11,18 +11,17 @@ import static com.librato.metrics.AssertionHelper.notNull;
  * Time: 10:25 PM
  * Represents a reading from a counter
  */
-public class CounterMeasurement implements Measurement {
-    private final String name;
+public class CounterMeasurement extends BaseMeasurement implements Measurement {
+
     private final Long count;
 
     public CounterMeasurement(String name, Long count) {
-        this.name = notNull(name);
-        this.count = notNull(count);
+        this(name, null, count);
     }
-
-    @Override
-    public String getName() {
-        return name;
+    
+    public CounterMeasurement(String name, String source, Long count) {
+        super(name, source);
+        this.count = notNull(count);
     }
 
     @Override

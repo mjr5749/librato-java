@@ -1,10 +1,9 @@
 package com.librato.metrics;
 
+import static com.librato.metrics.AssertionHelper.numeric;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.librato.metrics.AssertionHelper.notNull;
-import static com.librato.metrics.AssertionHelper.numeric;
 
 /**
  * User: mihasya
@@ -14,19 +13,17 @@ import static com.librato.metrics.AssertionHelper.numeric;
  * <p/>
  * See http://dev.librato.com/v1/post/metrics for an explanation of basic vs multi-sample gauge
  */
-public class SingleValueGaugeMeasurement implements Measurement {
+public class SingleValueGaugeMeasurement extends BaseMeasurement implements Measurement {
 
-    private final String name;
     private final Number reading;
 
     public SingleValueGaugeMeasurement(String name, Number reading) {
-        this.name = notNull(name);
-        this.reading = numeric(numeric(reading));
+        this(name, null, reading);
     }
-
-    @Override
-    public String getName() {
-        return name;
+    
+    public SingleValueGaugeMeasurement(String name, String source, Number reading) {
+        super(name, source);
+        this.reading = numeric(numeric(reading));
     }
 
     @Override

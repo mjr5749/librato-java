@@ -102,6 +102,12 @@ public class LibratoBatch {
             Measurement measurement = measurementIterator.next();
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("name", sanitizer.apply(measurement.getName()));
+            // check if this measurement has a source value included
+            if(measurement.getSource() != null && !measurement.getSource().trim().isEmpty())
+            {
+            	data.put("source", sanitizer.apply(measurement.getSource()));
+            }
+            
             data.putAll(measurement.toMap());
             if (measurement instanceof CounterMeasurement) {
                 counterData.add(data);
